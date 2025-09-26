@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
-import { useFinanzas } from '../../contexts/FinanceContext';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { agregarTransaccion } from "../../services/Services";
+import { toast } from "sonner";
 
 const AddTransactionModal = ({ show, onHide }) => {
-  const { agregarTransaccion } = useFinanzas();
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo")) || null;
 
-  const [form, setForm] = useState({
-    type: 'expense',
-    amount: '',
-    description: '',
-    category: ''
-  });
+  const [form, setForm] = useState({ tipo: "gasto", monto: "", descripcion: "", categoria: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.amount || isNaN(form.amount)) {
-      toast.error('Ingrese un monto válido');
+    if (!usuario) {
+      toast.error("Usuario no autenticado");
+      return;
+    }
+    if (!form.monto || isNaN(Number(form.monto))) {
+      toast.error("Ingrese un monto válido");
       return;
     }
     setLoading(true);
     try {
-      const res = await agregarTransaccion({
-        type: form.type,
-        amount: Number(form.amount),
-        description: form.description,
-        category: form.category
-      });
-      if (res && res.success) {
-        toast.success('Transacción agregada');
-        setForm({ type: 'expense', amount: '', description: '', category: '' });
-        onHide();
-      } else {
-        toast.error(res.error || 'No se pudo agregar la transacción');
-      }
+      const nueva = {
+        id: crypto.randomUUID(),
+        usuarioId: usuario.id,
+        tipo: form.tipo,
+        monto: Number(form.monto),
+        descripcion: form.descripcion,
+        categoria: form.categoria,
+        fecha: new Date().toISOString()
+      };
+      await agregarTransaccion(nueva);
+      toast.success("Transacción agregada");
+      onHide();
     } catch (err) {
-      toast.error('Error al agregar transacción');
+      toast.error("Error al guardar");
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -46,44 +45,30 @@ const AddTransactionModal = ({ show, onHide }) => {
   if (!show) return null;
 
   return (
-    <div className="modal d-block" tabIndex="-1" role="dialog" style={{ background: 'rgba(0,0,0,0.4)' }}>
+    <div className="modal d-block" tabIndex="-1" role="dialog" style={{ background: "rgba(0,0,0,0.35)" }}>
       <div className="modal-dialog">
         <div className="modal-content">
           <form onSubmit={handleSubmit}>
             <div className="modal-header">
               <h5 className="modal-title">Agregar Transacción</h5>
-              <button type="button" className="btn-close" aria-label="Cerrar" onClick={onHide}></button>
+              <button type="button" className="btn-close" onClick={onHide}></button>
             </div>
             <div className="modal-body">
-              <div className="mb-3">
-                <label className="form-label">Tipo</label>
-                <select name="type" value={form.type} onChange={handleChange} className="form-select">
-                  <option value="expense">Gasto</option>
-                  <option value="income">Ingreso</option>
-                </select>
-              </div>
+              <label className="form-label">Tipo</label>
+              <select name="tipo" value={form.tipo} onChange={handleChange} className="form-select mb-2">
+                <option value="gasto">Gasto</option>
+                <option value="ingreso">Ingreso</option>
+              </select>
 
-              <div className="mb-3">
-                <label className="form-label">Monto</label>
-                <input name="amount" value={form.amount} onChange={handleChange} className="form-control" placeholder="ej. 25000" />
-              </div>
+              <input name="monto" value={form.monto} onChange={handleChange} className="form-control mb-2" placeholder="Monto (ej: 15000)" />
 
-              <div className="mb-3">
-                <label className="form-label">Descripción</label>
-                <input name="description" value={form.description} onChange={handleChange} className="form-control" placeholder="Descripción" />
-              </div>
+              <input name="descripcion" value={form.descripcion} onChange={handleChange} className="form-control mb-2" placeholder="Descripción" />
 
-              <div className="mb-3">
-                <label className="form-label">Categoría</label>
-                <input name="category" value={form.category} onChange={handleChange} className="form-control" placeholder="Categoría (opcional)" />
-              </div>
+              <input name="categoria" value={form.categoria} onChange={handleChange} className="form-control mb-2" placeholder="Categoría (opcional)" />
             </div>
-
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={onHide} disabled={loading}>Cancelar</button>
-              <button type="submit" className="btn btn-primary" disabled={loading}>
-                {loading ? 'Guardando...' : 'Agregar'}
-              </button>
+              <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? "Guardando..." : "Guardar"}</button>
             </div>
           </form>
         </div>

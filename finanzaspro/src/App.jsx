@@ -1,49 +1,26 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ProveedorAutenticacion } from './contexts/AuthContext';
-import { ProveedorFinanzas } from './contexts/FinanceContext';
-import { RutaProtegida } from './components/ProtectedRoute';
-import { Toaster } from 'sonner';
-
-// Páginas (default exports)
-import PaginaInicio from './pages/LandingPage';
-import SobreNosotros from './pages/AboutUs';
-import IniciarSesion from './pages/Login';
-import Registrarse from './pages/Register';
-import Panel from './pages/Dashboard';
-
-// Estilos
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import AboutUs from "./pages/AboutUs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './styles/custom.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <ProveedorAutenticacion>
-        <ProveedorFinanzas>
-          <Router>
-            <Routes>
-              <Route path="/" element={<PaginaInicio />} />
-              <Route path="/about" element={<SobreNosotros />} />
-              <Route path="/login" element={<IniciarSesion />} />
-              <Route path="/register" element={<Registrarse />} />
-              <Route
-                path="/dashboard/*"
-                element={
-                  <RutaProtegida>
-                    <Panel />
-                  </RutaProtegida>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Router>
-          <Toaster position="top-right" />
-        </ProveedorFinanzas>
-      </ProveedorAutenticacion>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

@@ -1,27 +1,17 @@
-import React from 'react';
-import { useFinanzas } from '../../contexts/FinanceContext';
-import { servicioFinanzas } from '../../services/financeService';
+import React from "react";
 
-const HistoryView = () => {
-  const { obtenerTransaccionesRecientes } = useFinanzas();
-  const recientes = obtenerTransaccionesRecientes(10);
+const HistoryView = ({ transacciones = [] }) => {
+  const recientes = [...transacciones].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 10);
 
   return (
-    <div>
-      <h3>Historial de Transacciones</h3>
-      {recientes.length === 0 ? (
-        <p className="text-muted">Aún no hay transacciones.</p>
-      ) : (
-        <ul className="list-group">
-          {recientes.map(t => (
-            <li key={t.id} className="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <div className="fw-bold">{t.description || (t.type === 'income' ? 'Ingreso' : 'Gasto')}</div>
-                <small className="text-muted">{t.category || 'Sin categoria'} • {new Date(t.date).toLocaleString()}</small>
-              </div>
-              <div className={t.type === 'income' ? 'text-success fw-bold' : 'text-danger fw-bold'}>
-                {servicioFinanzas.formatearMoneda(t.amount)}
-              </div>
+    <div className="card shadow-sm p-3">
+      <h6>Historial</h6>
+      {recientes.length === 0 ? <p className="text-muted">Aún no hay transacciones.</p> : (
+        <ul className="list-group list-group-flush">
+          {recientes.map((t) => (
+            <li key={t.id} className="list-group-item d-flex justify-content-between">
+              <div>{t.descripcion || (t.tipo === "ingreso" ? "Ingreso" : "Gasto")}</div>
+              <div className={t.tipo === "ingreso" ? "text-success" : "text-danger"}>{t.tipo === "ingreso" ? "+" : "-"}₡{t.monto}</div>
             </li>
           ))}
         </ul>

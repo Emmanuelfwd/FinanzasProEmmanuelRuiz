@@ -1,99 +1,89 @@
-import React, { useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useAutenticacion } from "../contexts/AuthContext";
-import { useFinanzas } from "../contexts/FinanceContext";
-
-// Componentes del dashboard
-import DashboardHome from "../components/dashboard/DashboardHome";
-import ExpensesView from "../components/dashboard/ExpensesView";
+import React, { useEffect, useState } from "react";
+import { getTransaccionesPorUsuario, getDatosMensuales, getGastosPorCategoria, getTransacciones, eliminarTransaccion } from "../services/Services";
 import ChartsView from "../components/dashboard/ChartsView";
+import ExpensesView from "../components/dashboard/ExpensesView";
 import HistoryView from "../components/dashboard/HistoryView";
 import AddTransactionModal from "../components/dashboard/AddTransactionModal";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Dashboard = () => {
-  const { usuario, cerrarSesion } = useAutenticacion();
-  const [mostrarModal, setMostrarModal] = useState(false);
+  const [transacciones, setTransacciones] = useState([]);
+  const [datosMensuales, setDatosMensuales] = useState([]);
+  const [gastosCategoria, setGastosCategoria] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
-  if (!usuario) return <Navigate to="/login" replace />;
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+  useEffect(() => {
+    if (!usuario) {
+      navigate("/login");
+      return;
+    }
+    cargarDatos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const cargarDatos = async () => {
+    try {
+      const tx = await getTransaccionesPorUsuario(usuario.id);
+      setTransacciones(tx);
+      const monthly = await getDatosMensuales(usuario.id);
+      setDatosMensuales(monthly);
+      const byCat = await getGastosPorCategoria(usuario.id);
+      setGastosCategoria(byCat);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEliminar = async (id) => {
+    const ok = window.confirm("Eliminar esta transacción?");
+    if (!ok) return;
+    try {
+      await eliminarTransaccion(id);
+      toast.success("Transacción eliminada");
+      cargarDatos();
+    } catch (err) {
+      toast.error("Error al eliminar");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuarioActivo");
+    navigate("/login");
+  };
 
   return (
-    <div className="dashboard-container">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/dashboard">
-            FinanzasPro
-          </Link>
-          <button
-            className="btn btn-outline-light ms-auto"
-            onClick={cerrarSesion}
-          >
-            Cerrar Sesión
-          </button>
-        </div>
-      </nav>
-
-      <div className="container mt-4">
-        <div className="row">
-          {/* Sidebar */}
-          <div className="col-md-3 mb-4">
-            <div className="list-group">
-              <Link
-                to="/dashboard"
-                className="list-group-item list-group-item-action"
-              >
-                Inicio
-              </Link>
-              <Link
-                to="/dashboard/expenses"
-                className="list-group-item list-group-item-action"
-              >
-                Gastos
-              </Link>
-              <Link
-                to="/dashboard/charts"
-                className="list-group-item list-group-item-action"
-              >
-                Gráficos
-              </Link>
-              <Link
-                to="/dashboard/history"
-                className="list-group-item list-group-item-action"
-              >
-                Historial
-              </Link>
-            </div>
-            <button
-              className="btn btn-success w-100 mt-3"
-              onClick={() => setMostrarModal(true)}
-            >
-              + Agregar Transacción
-            </button>
-          </div>
-
-          {/* Contenido principal */}
-          <div className="col-md-9">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Routes>
-                <Route path="/" element={<DashboardHome />} />
-                <Route path="expenses" element={<ExpensesView />} />
-                <Route path="charts" element={<ChartsView />} />
-                <Route path="history" element={<HistoryView />} />
-              </Routes>
-            </motion.div>
-          </div>
+    <div className="container py-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>Hola, {usuario?.nombre}</h2>
+        <div>
+          <Link to="/" className="btn btn-link me-2">Inicio</Link>
+          <button className="btn btn-outline-danger" onClick={handleLogout}>Cerrar Sesión</button>
         </div>
       </div>
 
-      {/* Modal */}
-      <AddTransactionModal
-        show={mostrarModal}
-        onHide={() => setMostrarModal(false)}
-      />
+      <div className="mb-3">
+        <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>Agregar Transacción</button>
+        <button className="btn btn-secondary" onClick={cargarDatos}>Actualizar</button>
+      </div>
+
+      <div className="row g-4">
+        <div className="col-lg-8">
+          <ChartsView datosMensuales={datosMensuales} gastosCategoria={gastosCategoria} />
+        </div>
+        <div className="col-lg-4">
+          <ExpensesView transacciones={transacciones} onDelete={handleEliminar} />
+        </div>
+      </div>
+
+      <div className="mt-4">
+        <HistoryView transacciones={transacciones} />
+      </div>
+
+      <AddTransactionModal show={showModal} onHide={() => { setShowModal(false); cargarDatos(); }} />
     </div>
   );
 };

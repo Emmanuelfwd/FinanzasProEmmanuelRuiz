@@ -1,39 +1,22 @@
-import React from 'react';
-import { useFinanzas } from '../../contexts/FinanceContext';
-import { servicioFinanzas } from '../../services/financeService';
-import { toast } from 'sonner';
+import React from "react";
 
-const ExpensesView = () => {
-  const { obtenerGastosOrdenados, eliminarTransaccion } = useFinanzas();
-  const gastos = obtenerGastosOrdenados();
-
-  const handleDelete = async (id) => {
-    const ok = window.confirm('¿Eliminar esta transacción?');
-    if (!ok) return;
-    const res = await eliminarTransaccion(id);
-    if (res && res.success) {
-      toast.success('Transacción eliminada');
-    } else {
-      toast.error(res.error || 'Error al eliminar');
-    }
-  };
+const ExpensesView = ({ transacciones = [], onDelete }) => {
+  const gastos = transacciones.filter((t) => t.tipo === "gasto");
 
   return (
-    <div>
-      <h3>Gastos</h3>
-      {gastos.length === 0 ? (
-        <p className="text-muted">No hay gastos registrados.</p>
-      ) : (
-        <ul className="list-group">
-          {gastos.map(g => (
-            <li key={g.id} className="list-group-item d-flex justify-content-between align-items-start">
+    <div className="card shadow-sm p-3">
+      <h6>Gastos Recientes</h6>
+      {gastos.length === 0 ? <p className="text-muted">No hay gastos registrados.</p> : (
+        <ul className="list-group list-group-flush">
+          {gastos.slice(0, 6).map((g) => (
+            <li key={g.id} className="list-group-item d-flex justify-content-between align-items-center">
               <div>
-                <div className="fw-bold">{g.description || 'Sin descripción'}</div>
-                <small className="text-muted">{g.category || 'Otros'} — {new Date(g.date).toLocaleString()}</small>
+                <div className="fw-bold">{g.descripcion || "Sin descripción"}</div>
+                <small className="text-muted">{g.categoria} • {new Date(g.fecha).toLocaleDateString()}</small>
               </div>
               <div className="text-end">
-                <div className="fw-bold">{servicioFinanzas.formatearMoneda(g.amount)}</div>
-                <button className="btn btn-sm btn-outline-danger mt-2" onClick={() => handleDelete(g.id)}>Eliminar</button>
+                <div className="text-danger fw-bold">₡{g.monto}</div>
+                <button className="btn btn-sm btn-outline-danger mt-2" onClick={() => onDelete && onDelete(g.id)}>Eliminar</button>
               </div>
             </li>
           ))}
