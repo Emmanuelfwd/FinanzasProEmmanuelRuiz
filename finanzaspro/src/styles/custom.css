@@ -17,55 +17,33 @@ body {
 /* ============================
    🏠 Landing Page
    ============================ */
-.landing-page-root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.landing-navbar {
-  height: 60px;
-  padding: 0.4rem 0;
-}
-.landing-brand {
-  font-size: 1.05rem;
-  letter-spacing: 0.6px;
-}
-
+/* ====== LANDING PAGE ESTILOS ====== */
 .hero-section {
-  padding: 5.2rem 0 2.5rem;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(245, 247, 250, 0.6) 100%);
-  display: flex;
-  align-items: center;
-  text-align: center;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  padding-top: 6rem; /* para compensar navbar fixed */
+  padding-bottom: 6rem;
 }
-.hero-inner {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+
 .hero-title {
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.08;
-  margin-bottom: 1rem;
+  font-size: 2.8rem;
+  line-height: 1.2;
 }
+
 .hero-subtitle {
-  font-size: 1rem;
   max-width: 720px;
-  margin: 0 auto 2rem;
-  opacity: 0.9;
+  margin: 0 auto;
 }
-.hero-cta {
-  background: linear-gradient(90deg, #0d6efd 0%, #0056d6 100%);
+
+.feature-card {
   border: none;
-  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.12);
-  transition: transform 0.25s ease;
+  transition: all 0.3s ease;
 }
-.hero-cta:hover {
-  transform: translateY(-2px);
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
+
 
 /* Tarjetas de misión/contacto */
 .mission-card {

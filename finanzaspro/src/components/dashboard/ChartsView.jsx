@@ -38,7 +38,8 @@ const ChartsView = ({ datosMensuales = [], gastosCategoria = [] }) => {
             <ResponsiveContainer>
               <PieChart>
                 <Pie data={gastosCategoria} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                  {gastosCategoria.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                  {gastosCategoria.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}
+                   />)}
                 </Pie>
                 <Tooltip />
                 <Legend />

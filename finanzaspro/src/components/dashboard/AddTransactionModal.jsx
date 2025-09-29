@@ -34,9 +34,9 @@ const AddTransactionModal = ({ show, onHide }) => {
       await agregarTransaccion(nueva);
       toast.success("Transacción agregada");
       onHide();
-    } catch (err) {
+    } catch (error) {
       toast.error("Error al guardar");
-      console.error(err);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -62,9 +62,23 @@ const AddTransactionModal = ({ show, onHide }) => {
 
               <input name="monto" value={form.monto} onChange={handleChange} className="form-control mb-2" placeholder="Monto (ej: 15000)" />
 
-              <input name="descripcion" value={form.descripcion} onChange={handleChange} className="form-control mb-2" placeholder="Descripción" />
-
-              <input name="categoria" value={form.categoria} onChange={handleChange} className="form-control mb-2" placeholder="Categoría (opcional)" />
+              <label className="form-label">Descripción</label>
+              <select name="descripcion" value={form.descripcion} onChange={handleChange} className="form-select mb-2">
+                <option value="">Seleccione una categoría</option>
+                <option value="facturas">Facturas</option>
+                <option value="entretenimiento">Entretenimiento</option>
+                <option value="salud">Salud</option>
+                <option value="carro">Carro</option>
+                <option value="transporte">Transporte</option>
+                <option value="educacion">Educación</option>
+                <option value="comida">Comida</option>
+                <option value="ropa">Ropa</option>
+                <option value="hogar">Hogar</option>
+                <option value="viajes">Viajes</option>
+                <option value="otros">Otros</option>
+              </select>
+              <label className="form-label">Comentarios Relacionados</label>
+              <input name="categoria" value={form.categoria} onChange={handleChange} className="form-control mb-2" placeholder=" (opcional)" />
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={onHide} disabled={loading}>Cancelar</button>

@@ -33,8 +33,8 @@ const Dashboard = () => {
       setDatosMensuales(monthly);
       const byCat = await getGastosPorCategoria(usuario.id);
       setGastosCategoria(byCat);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -45,7 +45,7 @@ const Dashboard = () => {
       await eliminarTransaccion(id);
       toast.success("Transacción eliminada");
       cargarDatos();
-    } catch (err) {
+    } catch (error) {
       toast.error("Error al eliminar");
     }
   };

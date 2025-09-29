@@ -5,6 +5,12 @@
       "nombre": "Usuario Demo",
       "email": "demo@finanzas.com",
       "password": "demo123"
+    },
+    {
+      "id": "a0b87805-6584-4c55-8ebe-6808cf141b13",
+      "nombre": "Emmanue,l",
+      "email": "ruizemmanuel78@gmail.com",
+      "password": "2"
     }
   ],
   "transacciones": [
@@ -25,6 +31,42 @@
       "descripcion": "compras",
       "categoria": "compras",
       "fecha": "2025-09-26T15:25:02.785Z"
+    },
+    {
+      "id": "24c4c1b5-30aa-422e-9e61-bbe316c55c3f",
+      "usuarioId": "a0b87805-6584-4c55-8ebe-6808cf141b13",
+      "tipo": "ingreso",
+      "monto": 124444,
+      "descripcion": "si",
+      "categoria": "Gasto",
+      "fecha": "2025-09-29T14:36:42.323Z"
+    },
+    {
+      "id": "34fcefba-07e0-4fe9-ac6d-8d578b8e4b21",
+      "usuarioId": "a0b87805-6584-4c55-8ebe-6808cf141b13",
+      "tipo": "ingreso",
+      "monto": 32,
+      "descripcion": "si",
+      "categoria": "ingresos ",
+      "fecha": "2025-09-29T14:36:57.677Z"
+    },
+    {
+      "id": "b8989b03-510f-4e50-b55b-78504abf9863",
+      "usuarioId": "a0b87805-6584-4c55-8ebe-6808cf141b13",
+      "tipo": "gasto",
+      "monto": 321,
+      "descripcion": "si",
+      "categoria": "cine",
+      "fecha": "2025-09-29T14:37:15.654Z"
+    },
+    {
+      "id": "68eecfdf-a5e9-4cde-9093-bf2bcca63dd3",
+      "usuarioId": "a0b87805-6584-4c55-8ebe-6808cf141b13",
+      "tipo": "gasto",
+      "monto": 2000,
+      "descripcion": "Pago de Agua",
+      "categoria": "facturas",
+      "fecha": "2025-09-29T15:05:50.386Z"
     }
   ]
 }

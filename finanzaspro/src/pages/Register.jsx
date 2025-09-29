@@ -18,9 +18,9 @@ const Registrarse = () => {
       await registrarUsuario(nuevo);
       toast.success("Usuario registrado. Inicia sesión.");
       navigate("/login");
-    } catch (err) {
+    } catch (error) {
       toast.error("Error al registrar");
-      console.error(err);
+      console.error(error);
     } finally {
       setCargando(false);
     }
