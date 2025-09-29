@@ -14,8 +14,8 @@ const AddTransactionModal = ({ show, onHide }) => {
       try {
         const data = await getGastosTipo  ();
         setTipos(data);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
         toast.error("No se pudieron cargar las categorías");
       }
     };
