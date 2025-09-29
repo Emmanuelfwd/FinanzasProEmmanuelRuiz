@@ -12,7 +12,7 @@ const AddTransactionModal = ({ show, onHide }) => {
   useEffect(() => {
     const cargarTipos = async () => {
       try {
-        const data = await obtenerGastosTipo();
+        const data = await getGastosTipo  ();
         setTipos(data);
       } catch (err) {
         console.error(err);

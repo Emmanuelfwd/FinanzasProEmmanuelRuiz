@@ -1,4 +1,4 @@
-/* 🎨 Variables globales */
+/*  Variables globales */
 :root {
   --primary-color: #007bff;
   --success-color: #28a745;
@@ -15,7 +15,7 @@ body {
 }
 
 /* ============================
-   🏠 Landing Page
+    Landing Page
    ============================ */
 /* ====== LANDING PAGE ESTILOS ====== */
 .hero-section {
@@ -64,7 +64,7 @@ body {
 }
 
 /* ============================
-   📊 Dashboard
+    Dashboard
    ============================ */
 .sidebar {
   background-color: white;
@@ -156,7 +156,7 @@ body {
 }
 
 /* ============================
-   🔐 Auth
+    Auth
    ============================ */
 .auth-container {
   min-height: 100vh;
@@ -181,7 +181,7 @@ body {
 }
 
 /* ============================
-   🔘 Botones y Forms
+    Botones y Forms
    ============================ */
 .btn-primary {
   background: var(--primary-color);
@@ -222,7 +222,7 @@ body {
 }
 
 /* ============================
-   📞 Footer
+    Footer
    ============================ */
 .footer {
   background: #fff;
@@ -246,7 +246,7 @@ body {
 }
 
 /* ============================
-   📱 Responsive
+    Responsive
    ============================ */
 @media (max-width: 768px) {
   .sidebar {

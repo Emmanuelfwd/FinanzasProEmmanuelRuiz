@@ -166,7 +166,10 @@ export async function getGastosTipo() {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
+     console.log(response);
     return await response.json();
+   
+    
   } catch (error) {
     console.error("Error al obtener tipos de gasto", error);
     throw error;
