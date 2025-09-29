@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { agregarTransaccion, obtenerGastosTipo } from "../../services/Services";
+import { agregarTransaccion, getGastosTipo  } from "../../services/Services";
 import { toast } from "sonner";
 
 const AddTransactionModal = ({ show, onHide }) => {
