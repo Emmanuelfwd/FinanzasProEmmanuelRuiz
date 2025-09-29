@@ -87,14 +87,13 @@ const AddTransactionModal = ({ show, onHide }) => {
                 name="descripcion"
                 value={form.descripcion}
                 onChange={handleChange}
-                className="form-select mb-2"
-              >
+                className="form-select mb-2">
                 <option value="">Seleccione una categoría</option>
-                {tipos.map((t) => (
-                  <option key={t.id} value={t.nombre.toLowerCase()}>
-                    {t.nombre}
-                  </option>
-                ))}
+                  {tipos.map((t) => (
+                    <option key={t.id} value={t.nombre.toLowerCase()}>
+                      {t.nombre}
+                    </option>
+                  ))}
               </select>
 
               <label className="form-label">Comentarios Relacionados</label>
