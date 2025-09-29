@@ -1,21 +1,41 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const HistoryView = ({ transacciones = [] }) => {
-  const recientes = [...transacciones].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 10);
-
+const HistoryView = ({ transacciones }) => {
   return (
-    <div className="card shadow-sm p-3">
-      <h6>Historial</h6>
-      {recientes.length === 0 ? <p className="text-muted">Aún no hay transacciones.</p> : (
-        <ul className="list-group list-group-flush">
-          {recientes.map((t) => (
-            <li key={t.id} className="list-group-item d-flex justify-content-between">
-              <div>{t.descripcion || (t.tipo === "ingreso" ? "Ingreso" : "Gasto")}</div>
-              <div className={t.tipo === "ingreso" ? "text-success" : "text-danger"}>{t.tipo === "ingreso" ? "+" : "-"}₡{t.monto}</div>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div>
+      <motion.h5
+        className="fw-bold mb-3 text-secondary"
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
+        Historial de Transacciones
+      </motion.h5>
+      <ul className="list-group small">
+        {transacciones.length === 0 && (
+          <li className="list-group-item text-muted">No hay transacciones</li>
+        )}
+        {transacciones.slice(-10).reverse().map((t) => (
+          <li
+            key={t.id}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <span className="fw-bold">{t.descripcion}</span>
+              <div className="text-muted small">
+                {new Date(t.fecha).toLocaleString()}
+              </div>
+            </div>
+            <span
+              className={`fw-bold ${
+                t.tipo === "ingreso" ? "text-success" : "text-danger"
+              }`}
+            >
+              {t.tipo === "ingreso" ? "+" : "-"}₡{t.monto.toLocaleString()}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

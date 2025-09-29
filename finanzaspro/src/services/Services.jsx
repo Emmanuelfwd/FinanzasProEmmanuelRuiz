@@ -151,8 +151,9 @@ export async function getGastosPorCategoria(usuarioId) {
     const gastos = transacciones.filter((t) => t.tipo === "gasto");
     const agrupado = {};
     gastos.forEach((g) => {
-      const cat = g.categoria || "Otros";
-      agrupado[cat] = (agrupado[cat] || 0) + Number(g.monto || 0);
+      const desc = g.descripcion || "Sin descripción";
+      agrupado[desc] = (agrupado[desc] || 0) + Number(g.monto || 0);
+
     });
     return Object.keys(agrupado).map((k) => ({ name: k, value: agrupado[k] }));
   } catch (error) {
