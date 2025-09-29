@@ -8,7 +8,7 @@
     },
     {
       "id": "a0b87805-6584-4c55-8ebe-6808cf141b13",
-      "nombre": "Emmanue,l",
+      "nombre": "Emmanuel",
       "email": "ruizemmanuel78@gmail.com",
       "password": "2"
     }
@@ -66,7 +66,20 @@
       "monto": 2000,
       "descripcion": "Pago de Agua",
       "categoria": "facturas",
-      "fecha": "2025-09-29T15:05:50.386Z"
+      "fecha": "2025-08-29T15:05:50.386Z"
     }
+  ],
+  "gastosTipo": [
+    { "id": "1", "nombre": "Facturas" },
+    { "id": "2", "nombre": "Entretenimiento" },
+    { "id": "3", "nombre": "Salud" },
+    { "id": "4", "nombre": "Carro" },
+    { "id": "5", "nombre": "Transporte" },
+    { "id": "6", "nombre": "Educación" },
+    { "id": "7", "nombre": "Comida" },
+    { "id": "8", "nombre": "Ropa" },
+    { "id": "9", "nombre": "Hogar" },
+    { "id": "10", "nombre": "Viajes" },
+    { "id": "11", "nombre": "Otros" }
   ]
 }

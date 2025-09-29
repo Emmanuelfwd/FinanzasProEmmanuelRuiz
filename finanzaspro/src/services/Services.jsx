@@ -160,3 +160,15 @@ export async function getGastosPorCategoria(usuarioId) {
     throw error;
   }
 }
+export async function getGastosTipo() {
+  try {
+    const response = await fetch("http://localhost:3001/gastosTipo", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error al obtener tipos de gasto", error);
+    throw error;
+  }
+}

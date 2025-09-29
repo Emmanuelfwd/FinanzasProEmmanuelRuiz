@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { agregarTransaccion } from "../../services/Services";
+import React, { useState, useEffect } from "react";
+import { agregarTransaccion, obtenerGastosTipo } from "../../services/Services";
 import { toast } from "sonner";
 
 const AddTransactionModal = ({ show, onHide }) => {
@@ -7,6 +7,20 @@ const AddTransactionModal = ({ show, onHide }) => {
 
   const [form, setForm] = useState({ tipo: "gasto", monto: "", descripcion: "", categoria: "" });
   const [loading, setLoading] = useState(false);
+  const [tipos, setTipos] = useState([]);
+
+  useEffect(() => {
+    const cargarTipos = async () => {
+      try {
+        const data = await obtenerGastosTipo();
+        setTipos(data);
+      } catch (err) {
+        console.error(err);
+        toast.error("No se pudieron cargar las categorías");
+      }
+    };
+    cargarTipos();
+  }, []);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -60,29 +74,45 @@ const AddTransactionModal = ({ show, onHide }) => {
                 <option value="ingreso">Ingreso</option>
               </select>
 
-              <input name="monto" value={form.monto} onChange={handleChange} className="form-control mb-2" placeholder="Monto (ej: 15000)" />
+              <input
+                name="monto"
+                value={form.monto}
+                onChange={handleChange}
+                className="form-control mb-2"
+                placeholder="Monto (ej: 15000)"
+              />
 
               <label className="form-label">Descripción</label>
-              <select name="descripcion" value={form.descripcion} onChange={handleChange} className="form-select mb-2">
+              <select
+                name="descripcion"
+                value={form.descripcion}
+                onChange={handleChange}
+                className="form-select mb-2"
+              >
                 <option value="">Seleccione una categoría</option>
-                <option value="facturas">Facturas</option>
-                <option value="entretenimiento">Entretenimiento</option>
-                <option value="salud">Salud</option>
-                <option value="carro">Carro</option>
-                <option value="transporte">Transporte</option>
-                <option value="educacion">Educación</option>
-                <option value="comida">Comida</option>
-                <option value="ropa">Ropa</option>
-                <option value="hogar">Hogar</option>
-                <option value="viajes">Viajes</option>
-                <option value="otros">Otros</option>
+                {tipos.map((t) => (
+                  <option key={t.id} value={t.nombre.toLowerCase()}>
+                    {t.nombre}
+                  </option>
+                ))}
               </select>
+
               <label className="form-label">Comentarios Relacionados</label>
-              <input name="categoria" value={form.categoria} onChange={handleChange} className="form-control mb-2" placeholder=" (opcional)" />
+              <input
+                name="categoria"
+                value={form.categoria}
+                onChange={handleChange}
+                className="form-control mb-2"
+                placeholder=" (opcional)"
+              />
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={onHide} disabled={loading}>Cancelar</button>
-              <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? "Guardando..." : "Guardar"}</button>
+              <button type="button" className="btn btn-secondary" onClick={onHide} disabled={loading}>
+                Cancelar
+              </button>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? "Guardando..." : "Guardar"}
+              </button>
             </div>
           </form>
         </div>
