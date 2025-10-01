@@ -14,7 +14,7 @@ const Registrarse = () => {
     e.preventDefault();
     setCargando(true);
     try {
-      const nuevo = { id: crypto.randomUUID(), nombre, email, password };
+      const nuevo = { id: crypto.randomUUID(), nombre, email, password,userType: "normal" };
       await registrarUsuario(nuevo);
       toast.success("Usuario registrado. Inicia sesión.");
       navigate("/login");

@@ -1,48 +1,34 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Trash2 } from "lucide-react";
 
-const ExpensesView = ({ transacciones, onDelete }) => {
-  const gastos = transacciones.filter((t) => t.tipo === "gasto");
+const ExpensesView = ({ transacciones = [], onDelete, onEdit }) => {
+  
+  const gastos = transacciones.filter((t) => t.tipo === "gasto").slice(-5).reverse();
 
   return (
-    <div>
-      <motion.h5
-        className="fw-bold mb-3 text-danger"
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-      >
-        Gastos Destacados
-      </motion.h5>
-      <ul className="list-group small">
-        {gastos.length === 0 && (
-          <li className="list-group-item text-muted">No hay gastos</li>
-        )}
-        {gastos.slice(-5).reverse().map((g) => (
-          <li
-            key={g.id}
-            className="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div>
-              <span className="fw-bold">{g.descripcion}</span>
-              <div className="text-muted small">
-                {new Date(g.fecha).toLocaleDateString()}
+    <div className="card shadow-sm">
+      <div className="card-body">
+        <h5 className="card-title">Últimos Gastos</h5>
+        {gastos.length === 0 && <p className="text-muted">No hay gastos registrados</p>}
+        <ul className="list-group list-group-flush">
+          {gastos.map((g) => (
+            <li key={g.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <strong>{g.descripcion}</strong>
+                <div className="small text-muted">{new Date(g.fecha).toLocaleDateString()}</div>
               </div>
-            </div>
-            <div className="d-flex align-items-center gap-2">
-              <span className="fw-bold text-danger">
-                -₡{g.monto.toLocaleString()}
-              </span>
-              <button
-                className="btn btn-sm btn-outline-danger"
-                onClick={() => onDelete(g.id)}
-              >
-                <Trash2 size={14} />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+              <div className="d-flex align-items-center gap-2">
+                <span className="fw-bold text-danger">₡{Number(g.monto).toLocaleString("es-CR")}</span>
+                <button className="btn btn-sm btn-outline-primary" onClick={() => onEdit(g)}>
+                  Editar
+                </button>
+                <button className="btn btn-sm btn-outline-danger" onClick={() => onDelete(g.id)}>
+                  Eliminar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

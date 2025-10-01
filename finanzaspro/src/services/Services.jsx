@@ -1,15 +1,7 @@
-/* Servicios de la API (json-server) */
-/* Usa las rutas exactamente como json-server expone: /usuarios y /transacciones */
-
 /* ==================== USUARIOS ==================== */
-
-/* Obtener todos los usuarios */
 export async function getUsuarios() {
   try {
-    const response = await fetch("http://localhost:3001/usuarios", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
+    const response = await fetch("http://localhost:3001/usuarios");
     return await response.json();
   } catch (error) {
     console.error("Error al obtener usuarios", error);
@@ -17,7 +9,6 @@ export async function getUsuarios() {
   }
 }
 
-/* Registrar usuario */
 export async function registrarUsuario(usuario) {
   try {
     const response = await fetch("http://localhost:3001/usuarios", {
@@ -32,7 +23,6 @@ export async function registrarUsuario(usuario) {
   }
 }
 
-/* Validar login: devuelve el usuario encontrado o null */
 export async function validarLogin(email, password) {
   try {
     const response = await fetch(
@@ -46,15 +36,33 @@ export async function validarLogin(email, password) {
   }
 }
 
-/* ==================== TRANSACCIONES ==================== */
+export async function eliminarUsuario(id) {
+  try {
+    await fetch(`http://localhost:3001/usuarios/${id}`, { method: "DELETE" });
+  } catch (error) {
+    console.error("Error al eliminar usuario", error);
+    throw error;
+  }
+}
 
-/* Obtener todas las transacciones */
+export async function actualizarUsuario(usuario) {
+  try {
+    const response = await fetch(`http://localhost:3001/usuarios/${usuario.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuario)
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error al actualizar usuario", error);
+    throw error;
+  }
+}
+
+/* ==================== TRANSACCIONES ==================== */
 export async function getTransacciones() {
   try {
-    const response = await fetch("http://localhost:3001/transacciones", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
+    const response = await fetch("http://localhost:3001/transacciones");
     return await response.json();
   } catch (error) {
     console.error("Error al obtener transacciones", error);
@@ -62,12 +70,10 @@ export async function getTransacciones() {
   }
 }
 
-/* Obtener transacciones por usuario */
 export async function getTransaccionesPorUsuario(usuarioId) {
   try {
     const response = await fetch(
-      `http://localhost:3001/transacciones?usuarioId=${encodeURIComponent(usuarioId)}`,
-      { method: "GET", headers: { "Content-Type": "application/json" } }
+      `http://localhost:3001/transacciones?usuarioId=${encodeURIComponent(usuarioId)}`
     );
     return await response.json();
   } catch (error) {
@@ -76,7 +82,6 @@ export async function getTransaccionesPorUsuario(usuarioId) {
   }
 }
 
-/* Agregar transacción */
 export async function agregarTransaccion(transaccion) {
   try {
     const response = await fetch("http://localhost:3001/transacciones", {
@@ -91,20 +96,15 @@ export async function agregarTransaccion(transaccion) {
   }
 }
 
-/* Eliminar transacción */
 export async function eliminarTransaccion(id) {
   try {
-    await fetch(`http://localhost:3001/transacciones/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    });
+    await fetch(`http://localhost:3001/transacciones/${id}`, { method: "DELETE" });
   } catch (error) {
     console.error("Error al eliminar transacción", error);
     throw error;
   }
 }
 
-/* Actualizar transacción */
 export async function actualizarTransaccion(transaccion) {
   try {
     const response = await fetch(`http://localhost:3001/transacciones/${transaccion.id}`, {
@@ -119,9 +119,7 @@ export async function actualizarTransaccion(transaccion) {
   }
 }
 
-/* ==================== GRÁFICAS ==================== */
-
-/* Datos de ingresos/gastos por mes (devuelve array de { mes, ingresos, gastos, balance }) */
+/* ==================== GRAFICAS ==================== */
 export async function getDatosMensuales(usuarioId) {
   try {
     const transacciones = await getTransaccionesPorUsuario(usuarioId);
@@ -144,7 +142,6 @@ export async function getDatosMensuales(usuarioId) {
   }
 }
 
-/* Gastos por categoría (devuelve array de { name, value }) */
 export async function getGastosPorCategoria(usuarioId) {
   try {
     const transacciones = await getTransaccionesPorUsuario(usuarioId);
@@ -153,7 +150,6 @@ export async function getGastosPorCategoria(usuarioId) {
     gastos.forEach((g) => {
       const desc = g.descripcion || "Sin descripción";
       agrupado[desc] = (agrupado[desc] || 0) + Number(g.monto || 0);
-
     });
     return Object.keys(agrupado).map((k) => ({ name: k, value: agrupado[k] }));
   } catch (error) {
@@ -161,18 +157,55 @@ export async function getGastosPorCategoria(usuarioId) {
     throw error;
   }
 }
+
+/* ==================== GASTOS TIPO ==================== */
 export async function getGastosTipo() {
   try {
-    const response = await fetch("http://localhost:3001/gastosTipo", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-     console.log(response);
+    const response = await fetch("http://localhost:3001/gastosTipo");
     return await response.json();
-   
-    
   } catch (error) {
     console.error("Error al obtener tipos de gasto", error);
+    throw error;
+  }
+}
+
+export async function agregarGastoTipo(item) {
+  try {
+    const response = await fetch("http://localhost:3001/gastosTipo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error al agregar gasto tipo", error);
+    throw error;
+  }
+}
+
+// ===== NUEVA FUNCIÓN: AGREGAR GASTO TIPO CON ID ÚNICO SUMANDO 2 =====
+export async function agregarGastoTipoSeguro(nombre) {
+  try {
+    const gastosExistentes = await getGastosTipo();
+
+    // Tomamos el último elemento y le sumamos 2
+    const lastId = gastosExistentes.length
+      ? gastosExistentes[gastosExistentes.length - 1].id
+      : 0;
+
+    const nuevoGasto = { id: lastId + 1, nombre };
+    return await agregarGastoTipo(nuevoGasto);
+  } catch (error) {
+    console.error("Error al agregar gasto tipo seguro", error);
+    throw error;
+  }
+}
+
+export async function eliminarGastoTipo(id) {
+  try {
+    await fetch(`http://localhost:3001/gastosTipo/${id}`, { method: "DELETE" });
+  } catch (error) {
+    console.error("Error al eliminar gasto tipo", error);
     throw error;
   }
 }

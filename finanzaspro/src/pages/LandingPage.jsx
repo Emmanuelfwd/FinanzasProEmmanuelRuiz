@@ -41,6 +41,9 @@ const LandingPage = () => {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -56,7 +59,7 @@ const LandingPage = () => {
                 <Link className="nav-link" to="/login">Iniciar Sesión</Link>
               </li>
               <li className="nav-item">
-                <Link className="btn btn-outline-light ms-2" to="/register">
+                <Link className="btn btn-outline-primary ms-2" to="/register">
                   Registrarse
                 </Link>
               </li>
@@ -82,7 +85,7 @@ const LandingPage = () => {
             Controla tus <span className="text-warning">Finanzas</span> como un Pro
           </motion.h1>
           <motion.p
-            className="hero-subtitle lead mb-4"
+            className="hero-subtitle lead mb-4 mx-auto"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -98,7 +101,7 @@ const LandingPage = () => {
             <Link to="/register" className="btn btn-warning btn-lg px-4">
               Comenzar Gratis
             </Link>
-            <Link to="/about" className="btn btn-outline-light btn-lg px-4">
+            <Link to="/about" className="btn btn-outline-primary btn-lg px-4">
               Saber Más
             </Link>
           </motion.div>

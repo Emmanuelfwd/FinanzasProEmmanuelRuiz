@@ -1,41 +1,49 @@
 import React from "react";
-import { motion } from "framer-motion";
 
-const HistoryView = ({ transacciones }) => {
+const HistoryView = ({ transacciones = [], onDelete, onEdit }) => {
+  if (transacciones.length === 0) {
+    return (
+      <div className="card shadow-sm">
+        <div className="card-body">
+          <h5 className="card-title">Historial</h5>
+          <p className="text-muted">No hay transacciones</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <motion.h5
-        className="fw-bold mb-3 text-secondary"
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-      >
-        Historial de Transacciones
-      </motion.h5>
-      <ul className="list-group small">
-        {transacciones.length === 0 && (
-          <li className="list-group-item text-muted">No hay transacciones</li>
-        )}
-        {transacciones.slice(-10).reverse().map((t) => (
-          <li
-            key={t.id}
-            className="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div>
-              <span className="fw-bold">{t.descripcion}</span>
-              <div className="text-muted small">
-                {new Date(t.fecha).toLocaleString()}
-              </div>
-            </div>
-            <span
-              className={`fw-bold ${
-                t.tipo === "ingreso" ? "text-success" : "text-danger"
-              }`}
-            >
-              {t.tipo === "ingreso" ? "+" : "-"}₡{t.monto.toLocaleString()}
-            </span>
-          </li>
-        ))}
-      </ul>
+    <div className="card shadow-sm">
+      <div className="card-body">
+        <h5 className="card-title">Historial de Transacciones</h5>
+        <ul className="list-group list-group-flush">
+          {transacciones
+            .slice()
+            .reverse()
+            .map((t) => (
+              <li key={t.id} className="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{t.descripcion}</strong> —{" "}
+                  <span className={t.tipo === "ingreso" ? "text-success" : "text-danger"}>
+                    {t.tipo}
+                  </span>
+                  <div className="small text-muted">{new Date(t.fecha).toLocaleDateString()}</div>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <span className="fw-bold">
+                    ₡{Number(t.monto).toLocaleString("es-CR")}
+                  </span>
+                  <button className="btn btn-sm btn-outline-primary" onClick={() => onEdit(t)}>
+                    Editar
+                  </button>
+                  <button className="btn btn-sm btn-outline-danger" onClick={() => onDelete(t.id)}>
+                    Eliminar
+                  </button>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };
