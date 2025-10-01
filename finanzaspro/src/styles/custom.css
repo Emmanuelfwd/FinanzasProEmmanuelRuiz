@@ -1,153 +1,70 @@
-/*  Variables globales */
+/* =========================
+   🎨 Variables globales
+   ========================= */
 :root {
-  --primary-color: #007bff;
+  --primary-color: #0d6efd;
   --success-color: #28a745;
   --warning-color: #ffc107;
   --danger-color: #dc3545;
   --dark-color: #343a40;
   --light-color: #f8f9fa;
-  --sidebar-width: 250px;
 }
 
+/* =========================
+   ✨ General
+   ========================= */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--light-color);
-  
+  color: #212529;
 }
 
-/* ============================
-    Landing Page
-   ============================ */
-/* ====== LANDING PAGE ESTILOS ====== */
-.hero-section {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
-  padding-top: 6rem; /* para compensar navbar fixed */
-  padding-bottom: 6rem;
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
-.hero-title {
-  font-size: 2.8rem;
-  line-height: 1.2;
-}
-
-.hero-subtitle {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-
-/* Tarjetas de misión/contacto */
-.mission-card {
-  max-width: 900px;
-  margin: -40px auto 0;
-}
-.contact-card {
-  max-width: 700px;
-  margin: 2rem auto;
-}
 .card {
-  border-radius: 10px;
+  border-radius: 14px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* ============================
-    Dashboard
-   ============================ */
-.sidebar {
-  background-color: white;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: var(--sidebar-width);
-  z-index: 1000;
-  overflow-y: auto;
-  transition: transform 0.3s ease;
-}
-.sidebar-brand {
-  padding: 1.5rem;
-  border-bottom: 1px solid #e9ecef;
-  text-align: center;
-}
-.sidebar-nav-item {
-  display: block;
-  padding: 0.75rem 1.5rem;
-  color: var(--dark-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.sidebar-nav-item:hover,
-.sidebar-nav-item.active {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.main-content {
-  margin-left: var(--sidebar-width);
-  padding: 2rem;
-  min-height: 100vh;
-}
-
+/* 📊 Balance */
 .balance-card {
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
 }
-.balance-positive {
-  background: linear-gradient(135deg, var(--success-color), #218838);
-  color: white;
-}
-.balance-warning {
-  background: linear-gradient(135deg, var(--warning-color), #e0a800);
-  color: var(--dark-color);
-}
-.balance-negative {
-  background: linear-gradient(135deg, var(--danger-color), #c82333);
-  color: white;
-}
+
 .balance-amount {
   font-size: 2.5rem;
   font-weight: bold;
 }
 
+
+
+/* 📑 Secciones */
 .stats-card,
 .chart-container {
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
-.stats-card:hover {
-  transform: translateY(-2px);
-}
-.stats-icon {
-  font-size: 2rem;
-  opacity: 0.8;
+.stats-card h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
+/* 💸 Transacciones */
 .transaction-item {
-  border: none;
   border-left: 4px solid var(--primary-color);
-  margin-bottom: 0.5rem;
   transition: box-shadow 0.3s ease;
 }
 .transaction-item:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .transaction-expense {
   border-left-color: var(--danger-color);
@@ -156,169 +73,107 @@ body {
   border-left-color: var(--success-color);
 }
 
-/* ============================
-    Auth
-   ============================ */
+/* =========================
+   🔑 Auth Pages (Login/Registro)
+   ========================= */
 .auth-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  justify-content: center;
+  background: linear-gradient(135deg, #4facfe, #00f2fe); /* Azul → turquesa suave */
 }
+
 .auth-card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  background: #fff;
 }
+
 .auth-header {
   background: var(--primary-color);
   color: white;
+  padding: 1.5rem;
   text-align: center;
-  padding: 2rem;
-}
-.auth-body {
-  padding: 2rem;
 }
 
-/* ============================
-    Botones y Forms
-   ============================ */
+.auth-header h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.auth-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.auth-body {
+  padding: 1.5rem;
+}
+
+/* =========================
+   🖱 Botones y Forms
+   ========================= */
 .btn-primary {
   background: var(--primary-color);
   border: none;
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
-  transition: all 0.3s ease;
 }
 .btn-primary:hover {
   background: #0056b3;
-  transform: translateY(-1px);
 }
 .btn-outline-primary {
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
   border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
 }
 .btn-outline-primary:hover {
   background: var(--primary-color);
   color: white;
-  transform: translateY(-1px);
 }
 
-.form-control,
-.form-select {
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  padding: 0.75rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.form-control:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-/* ============================
-    Footer
-   ============================ */
-.footer {
-  background: #fff;
-  padding: 2.5rem 0 1rem;
-  margin-top: auto;
-  text-align: center;
-}
-.footer-links {
-  list-style: none;
-  padding: 0;
-}
-.footer-links li {
-  margin-bottom: 0.5rem;
-}
-.footer-links a {
-  color: #adb5bd;
-  transition: color 0.3s ease;
-}
-.footer-links a:hover {
-  color: #000;
-}
-
-/* ============================
-    Responsive
-   ============================ */
+/* =========================
+   📱 Responsive
+   ========================= */
 @media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-  }
-  .sidebar.show {
-    transform: translateX(0);
-  }
-  .main-content {
-    margin-left: 0;
-    padding: 1rem;
-  }
-  .hero-title {
-    font-size: 2.2rem;
-  }
   .balance-amount {
     font-size: 2rem;
   }
-  .mission-card {
-    margin-top: -20px;
-  }
 }
 
-/* ============================
-   ✨ Animaciones
-   ============================ */
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.slide-in-left {
-  animation: slideInLeft 0.5s ease-out;
-}
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-.slide-in-right {
-  animation: slideInRight 0.5s ease-out;
-}
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
+.auth-card {
+  max-width: 400px;
+  margin: auto;
 }
 
-/* ===== DASHBOARD ===== */
-.dashboard {
-  min-height: 100vh;
+.auth-header {
+  background: var(--primary-color);
+  color: white;
+  padding: 2rem;
+  border-bottom: 3px solid rgba(255,255,255,0.2);
 }
 
-.stat-card {
-  border-radius: 12px;
-  transition: all 0.3s ease;
+.auth-header h3 {
+  font-weight: 600;
 }
 
-.stat-card h4 {
-  font-size: 1.5rem;
-}
-/* ===== COMPONENTS: CHARTS, EXPENSES, HISTORY ===== */
-.card h5 {
-  font-size: 1.1rem;
+.auth-body {
+  padding: 2rem;
+  background: white;
 }
 
-.list-group-item {
-  border: none;
-  border-bottom: 1px solid #f1f1f1;
-}
-
-.list-group-item:last-child {
-  border-bottom: none;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }

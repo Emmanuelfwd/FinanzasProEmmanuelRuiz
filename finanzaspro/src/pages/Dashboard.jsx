@@ -10,6 +10,7 @@ import ExpensesView from "../components/dashboard/ExpensesView";
 import HistoryView from "../components/dashboard/HistoryView";
 import AddTransactionModal from "../components/dashboard/AddTransactionModal";
 import EditTransactionModal from "../components/dashboard/EditTransactionModal";
+import DashboardHome from "../components/dashboard/DashboardHome";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -68,37 +69,43 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Hola, {usuario?.nombre}</h2>
+    <div className="dashboard container py-4">
+      {/* Header */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">Hola, {usuario?.nombre}</h2>
         <div>
           {usuario?.userType === "admin" && (
-            <Link to="/admin" className="btn btn-warning me-2">
+            <Link to="/admin" className="btn btn-warning me-2 shadow-sm">
               Panel Admin
             </Link>
           )}
-          <Link to="/" className="btn btn-link me-2">
+          <Link to="/" className="btn btn-outline-secondary me-2">
             Inicio
           </Link>
-          <button className="btn btn-outline-danger" onClick={handleLogout}>
+          <button className="btn btn-danger shadow-sm" onClick={handleLogout}>
             Cerrar Sesión
           </button>
         </div>
       </div>
 
-      <div className="mb-3">
+      {/* Acciones */}
+      <div className="mb-4">
         <button
-          className="btn btn-primary me-2"
+          className="btn btn-primary me-2 shadow-sm"
           onClick={() => setShowAddModal(true)}
         >
-          Agregar Transacción
+          + Agregar Transacción
         </button>
-        <button className="btn btn-secondary" onClick={cargarDatos}>
-          Actualizar
+        <button className="btn btn-outline-primary shadow-sm" onClick={cargarDatos}>
+          ⟳ Actualizar
         </button>
       </div>
 
-      <div className="row g-4">
+      {/* Contador Balance */}
+      <DashboardHome transacciones={transacciones} />
+
+      {/* Dashboard contenido */}
+      <div className="row g-4 mt-3">
         <div className="col-lg-8">
           <ChartsView
             datosMensuales={datosMensuales}
@@ -122,7 +129,7 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Modal para agregar */}
+      {/* Modales */}
       <AddTransactionModal
         show={showAddModal}
         onHide={() => {
@@ -131,7 +138,6 @@ const Dashboard = () => {
         }}
       />
 
-      {/* Modal para editar */}
       <EditTransactionModal
         show={showEditModal}
         data={editData}

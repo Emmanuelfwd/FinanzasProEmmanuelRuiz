@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./Routes/Routing";
@@ -16,3 +15,4 @@ function App() {
 }
 
 export default App;
+
