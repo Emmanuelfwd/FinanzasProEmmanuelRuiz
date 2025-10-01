@@ -31,6 +31,33 @@
       "descripcion": "prueba",
       "categoria": "",
       "fecha": "2025-10-01T17:26:55.141Z"
+    },
+    {
+      "id": "c0759b31-01fb-4338-aa00-4422b3f8c534",
+      "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
+      "tipo": "ingreso",
+      "monto": 30000,
+      "descripcion": "prueba",
+      "categoria": "",
+      "fecha": "2025-9-01T21:14:18.858Z"
+    },
+    {
+      "id": "2509df11-d2ec-4ed4-8c4d-ef84bf4ff625",
+      "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
+      "tipo": "gasto",
+      "monto": 150000,
+      "descripcion": "facturas",
+      "categoria": "",
+      "fecha": "2025-9-01T21:14:49.893Z"
+    },
+    {
+      "id": "8dc9f4ff-ff1c-4e9f-9562-68697bbbb424",
+      "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
+      "tipo": "ingreso",
+      "monto": 20000,
+      "descripcion": "prueba",
+      "categoria": "",
+      "fecha": "2025-10-01T21:15:00.727Z"
     }
   ],
   "gastosTipo": [

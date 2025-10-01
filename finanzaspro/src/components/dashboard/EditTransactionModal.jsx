@@ -13,13 +13,14 @@ const EditTransactionModal = ({ show, onHide, data }) => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await actualizarTransaccion({ ...data, ...form, monto: Number(form.monto) });
       toast.success("Transacción actualizada");
       onHide(true); // true = se actualizaron datos
-    } catch (err) {
+    } catch (error) {
       toast.error("Error al actualizar");
     }
   };

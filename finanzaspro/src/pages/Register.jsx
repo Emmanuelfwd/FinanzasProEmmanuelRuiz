@@ -36,8 +36,8 @@ const Register = () => {
       await registrarUsuario(nuevoUsuario);
       toast.success("Usuario registrado. Inicia sesión.");
       navigate("/login");
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       toast.error("Error al registrar");
     } finally {
       setLoading(false);

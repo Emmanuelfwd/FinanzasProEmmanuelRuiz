@@ -25,8 +25,8 @@ const Login = () => {
       } else {
         toast.error("Credenciales incorrectas");
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       toast.error("Error de conexión");
     } finally {
       setLoading(false);
