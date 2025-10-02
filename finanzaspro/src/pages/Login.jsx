@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // usar la función del servicio que ya existe
+     
       const usuario = await validarLogin(email, password);
       if (usuario) {
         localStorage.setItem("usuarioActivo", JSON.stringify(usuario));

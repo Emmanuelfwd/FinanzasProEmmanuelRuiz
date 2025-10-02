@@ -19,7 +19,7 @@ const EditTransactionModal = ({ show, onHide, data }) => {
     try {
       await actualizarTransaccion({ ...data, ...form, monto: Number(form.monto) });
       toast.success("Transacción actualizada");
-      onHide(true); // true = se actualizaron datos
+      onHide(true); 
     } catch (error) {
       toast.error("Error al actualizar");
     }

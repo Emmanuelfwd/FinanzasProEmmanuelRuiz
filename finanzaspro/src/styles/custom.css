@@ -1,6 +1,4 @@
-/* =========================
-   🎨 Variables globales
-   ========================= */
+
 :root {
   --primary-color: #0d6efd;
   --success-color: #28a745;
@@ -10,12 +8,10 @@
   --light-color: #f8f9fa;
 }
 
-/* =========================
-   ✨ General
-   ========================= */
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--light-color);
+  background-color: #f8f9fa;
   color: #212529;
 }
 
@@ -33,7 +29,7 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* 📊 Balance */
+
 .balance-card {
   border: none;
   border-radius: 16px;
@@ -46,7 +42,6 @@ body {
 
 
 
-/* 📑 Secciones */
 .stats-card,
 .chart-container {
   border: none;
@@ -58,31 +53,28 @@ body {
   font-weight: 600;
 }
 
-/* 💸 Transacciones */
+
 .transaction-item {
-  border-left: 4px solid var(--primary-color);
+  border-left: 4px solid #0d6efd;
   transition: box-shadow 0.3s ease;
 }
 .transaction-item:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .transaction-expense {
-  border-left-color: var(--danger-color);
+  border-left-color: #dc3545;
 }
 .transaction-income {
-  border-left-color: var(--success-color);
+  border-left-color: #28a745;
 }
 
-/* =========================
-   🔑 Auth Pages (Login/Registro)
-   ========================= */
 .auth-container {
   min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #4facfe, #00f2fe); /* Azul → turquesa suave */
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
 .auth-card {
@@ -95,7 +87,7 @@ body {
 }
 
 .auth-header {
-  background: var(--primary-color);
+  background: #0d6efd;
   color: white;
   padding: 1.5rem;
   text-align: center;
@@ -117,11 +109,9 @@ body {
   padding: 1.5rem;
 }
 
-/* =========================
-   🖱 Botones y Forms
-   ========================= */
+
 .btn-primary {
-  background: var(--primary-color);
+  background: #0d6efd;
   border: none;
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
@@ -131,18 +121,15 @@ body {
   background: #0056b3;
 }
 .btn-outline-primary {
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
   border-radius: 8px;
 }
 .btn-outline-primary:hover {
-  background: var(--primary-color);
+  background: #0d6efd;
   color: white;
 }
 
-/* =========================
-   📱 Responsive
-   ========================= */
 @media (max-width: 768px) {
   .balance-amount {
     font-size: 2rem;
@@ -155,7 +142,7 @@ body {
 }
 
 .auth-header {
-  background: var(--primary-color);
+  background: #0d6efd;
   color: white;
   padding: 2rem;
   border-bottom: 3px solid rgba(255,255,255,0.2);

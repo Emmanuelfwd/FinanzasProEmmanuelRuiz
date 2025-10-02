@@ -4,7 +4,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tool
 const ChartsView = ({ datosMensuales = [], gastosCategoria = [] }) => {
   const COLORS = ["#007bff", "#28a745", "#ffc107", "#dc3545", "#6f42c1", "#20c997"];
 
-  // map month key to readable label for the X axis
+  
   const datosMostrar = datosMensuales.map((d) => ({ ...d, mesLabel: d.mes }));
 
   return (

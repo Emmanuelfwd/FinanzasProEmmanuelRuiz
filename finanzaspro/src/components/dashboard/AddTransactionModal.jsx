@@ -17,7 +17,7 @@ const AddTransactionModal = ({ show, onHide }) => {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
-    // Cada vez que se abre el modal, limpiar formulario
+
     if (show) {
       setForm(initialForm);
     }
@@ -61,7 +61,7 @@ const AddTransactionModal = ({ show, onHide }) => {
       };
       await agregarTransaccion(nueva);
       toast.success("Transacción agregada");
-      onHide(); // cerrar modal y refrescar dashboard
+      onHide(); 
     } catch (error) {
       toast.error("Error al guardar");
       console.error(error);

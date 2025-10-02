@@ -30,7 +30,7 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      {/* NAVBAR */}
+    
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
         <div className="container">
           <Link className="navbar-brand fw-bold" to="/">
@@ -68,7 +68,7 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* HERO */}
+     
       <motion.section
         className="hero-section text-white text-center"
         initial={{ opacity: 0 }}
@@ -80,9 +80,9 @@ const LandingPage = () => {
             className="hero-title fw-bold mb-3"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.1 }}
           >
-            Controla tus <span className="text-warning">Finanzas</span> como un Pro
+            <span className="text-success"> Controla tus Finanzas como un Pro</span> 
           </motion.h1>
           <motion.p
             className="hero-subtitle lead mb-4 mx-auto"
@@ -108,7 +108,7 @@ const LandingPage = () => {
         </div>
       </motion.section>
 
-      {/* FEATURES */}
+      
       <section className="py-5 bg-light">
         <div className="container">
           <motion.div
@@ -142,7 +142,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA */}
+ 
       <motion.section
         className="py-5 bg-primary text-white text-center"
         initial={{ opacity: 0 }}
@@ -161,7 +161,7 @@ const LandingPage = () => {
         </div>
       </motion.section>
 
-      {/* FOOTER */}
+
       <Footer />
     </div>
   );

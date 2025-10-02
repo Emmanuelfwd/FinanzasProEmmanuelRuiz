@@ -5,7 +5,7 @@ const GastosTipoList = ({ gastosTipo = [], onDelete }) => {
     <ul className="list-group">
       {gastosTipo.map((gasto) => (
         <li
-          key={gasto.id} // ID seguro generado con agregarGastoTipoSeguro
+          key={gasto.id} 
           className="list-group-item d-flex justify-content-between align-items-center"
         >
           {gasto.nombre}

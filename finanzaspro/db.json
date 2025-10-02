@@ -9,8 +9,8 @@
     },
     {
       "id": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
-      "nombre": "peo",
-      "email": "peo@peo.com",
+      "nombre": "pedro",
+      "email": "pedro@pe.com",
       "password": "2",
       "userType": "normal"
     },
@@ -20,6 +20,13 @@
       "email": "pepe@pepe.com",
       "password": "2",
       "userType": "normal"
+    },
+    {
+      "id": "91d0529a-388f-4f10-b2b7-a12e534512d4",
+      "nombre": "Mario",
+      "email": "mario@m.com",
+      "password": "2",
+      "userType": "normal"
     }
   ],
   "transacciones": [
@@ -27,7 +34,7 @@
       "id": "84bf484e-5bce-4087-8256-402010034306",
       "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
       "tipo": "gasto",
-      "monto": 10000,
+      "monto": 100000,
       "descripcion": "prueba",
       "categoria": "",
       "fecha": "2025-10-01T17:26:55.141Z"
@@ -39,7 +46,7 @@
       "monto": 30000,
       "descripcion": "prueba",
       "categoria": "",
-      "fecha": "2025-9-01T21:14:18.858Z"
+      "fecha": "2025-11-01T21:14:18.858Z"
     },
     {
       "id": "2509df11-d2ec-4ed4-8c4d-ef84bf4ff625",
@@ -48,7 +55,7 @@
       "monto": 150000,
       "descripcion": "facturas",
       "categoria": "",
-      "fecha": "2025-9-01T21:14:49.893Z"
+      "fecha": "2025-11-01T21:14:49.893Z"
     },
     {
       "id": "8dc9f4ff-ff1c-4e9f-9562-68697bbbb424",
@@ -58,6 +65,15 @@
       "descripcion": "prueba",
       "categoria": "",
       "fecha": "2025-10-01T21:15:00.727Z"
+    },
+    {
+      "id": "11c426bf-1693-4b93-b7f7-0b34c55a8a7c",
+      "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
+      "tipo": "ingreso",
+      "monto": 150000,
+      "descripcion": "salario",
+      "categoria": "",
+      "fecha": "2025-10-02T04:06:11.714Z"
     }
   ],
   "gastosTipo": [
@@ -107,7 +123,19 @@
     },
     {
       "id": "111",
-      "nombre": "prueba"
+      "nombre": "Salario"
+    },
+    {
+      "id": "1111",
+      "nombre": "Ventas"
+    },
+    {
+      "id": "11111",
+      "nombre": "Prestamo"
+    },
+    {
+      "id": "111111",
+      "nombre": "Regalo"
     }
   ]
 }
