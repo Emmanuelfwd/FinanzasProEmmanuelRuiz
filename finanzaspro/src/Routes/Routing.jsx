@@ -21,7 +21,7 @@ const Routing = () => (
     <Route path="/about" element={<AcercaDe />} />
     <Route path="/register" element={<Register />} />
     <Route path="/dashboard" element={<DashboardWrapper />} />
-    <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/admin" element={<DashboardWrapper />} />
   </Routes>
 );
 

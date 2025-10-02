@@ -9,7 +9,7 @@
     },
     {
       "id": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
-      "nombre": "pedro",
+      "nombre": "Pepedro",
       "email": "pedro@pe.com",
       "password": "2",
       "userType": "normal"
@@ -74,6 +74,15 @@
       "descripcion": "salario",
       "categoria": "",
       "fecha": "2025-10-02T04:06:11.714Z"
+    },
+    {
+      "id": "ae34792d-bf3e-411b-9f86-4fb10a58a437",
+      "usuarioId": "1a20fa37-9501-465c-a6fa-21e99622c8e1",
+      "tipo": "gasto",
+      "monto": 25000,
+      "descripcion": "regalo",
+      "categoria": "",
+      "fecha": "2025-10-02T13:43:19.828Z"
     }
   ],
   "gastosTipo": [
@@ -136,6 +145,14 @@
     {
       "id": "111111",
       "nombre": "Regalo"
+    },
+    {
+      "id": "1111111",
+      "nombre": "prueban nueva"
+    },
+    {
+      "id": "11111111",
+      "nombre": "algo"
     }
   ]
 }
